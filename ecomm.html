@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card{
+            width: 25rem;
+            padding: 0.5rem;
+            max-width: 300px;
+            border-radius: 1rem;
+            margin: 1rem;
+        }
+        .rounded{
+            border-radius: 1rem;
+        }
+        .img-md{
+            width: 100%;
+            max-width: 100%;
+            height: 15rem;
+            object-fit: cover;
+        }
+        .text-gray{
+            color: #454545;
+        }
+        .text-semibold{
+            font-weight: 600;
+        }
+        .serif{
+            font-family: Tahoma;
+        }
+        .bg-yellow{
+            background-color: blanchedalmond;
+        }
+        .wrap{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+        .line-clamp{
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" class="wrap">
+        
+    </div>
+    <script>
+        fetch('https://fakestoreapi.com/products')
+            .then(res=>res.json())
+            .then(json=>{
+        for (let key in json) {
+            
+            let code = `
+            <div id="${json[key].id}" class="bg-yellow card">
+            <img src="${json[key].image}" alt="" class="img-md rounded ">
+            <h2 class="text-gray text-semibold serif">${json[key].title}</h2> <small id="category">${json[key].category}</small>
+            <p id="desc" class="line-clamp">${json[key].description}</p>
+            <h3 id="price">${json[key].price}</h3>
+        </div>
+            `;
+        document.getElementById('box').innerHTML+=code;
+        }}).catch();
+        
+    </script>
+</body>
+</html>
